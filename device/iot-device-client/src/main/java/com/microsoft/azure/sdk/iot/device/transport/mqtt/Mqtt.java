@@ -86,6 +86,7 @@ abstract public class Mqtt implements MqttCallback
             this.connectionOptions.setUserName(userName);
             this.connectionOptions.setPassword(userPassword.toCharArray());
             this.connectionOptions.setSocketFactory(iotHubSSLContext.getIotHubSslContext().getSocketFactory());
+            this.connectionOptions.setKeepAliveInterval(90);
         }
 
     }
@@ -227,7 +228,7 @@ abstract public class Mqtt implements MqttCallback
                 /*
                 ** Codes_SRS_Mqtt_25_007: [**If an MQTT connection is unable to be established for any reason, the function shall throw an IOException.**]**
                  */
-                throw new IOException("Unable to connect to service" + e.getMessage());
+                throw new IOException("Unable to connect to service" + e.getCause());
             }
         }
 
@@ -506,7 +507,7 @@ abstract public class Mqtt implements MqttCallback
                     try
                     {
                         currentReconnectionAttempt++;
-                        connect();
+                       // connect();
 
                     }
                     catch (Exception e)

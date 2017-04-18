@@ -14,6 +14,7 @@ import com.microsoft.azure.sdk.iot.device.transport.State;
 import com.microsoft.azure.sdk.iot.device.transport.TransportUtils;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URLEncoder;
 
 
@@ -29,8 +30,16 @@ public class MqttIotHubConnection
     private String iotHubUserPassword;
 
     //string constants
+    private static String wsSSLPrefix = "wss://";
+    private static String wsSSLPortSuffix = ":443";
+    private boolean webSocketEnabled = false;
+
+    //private static String sslPrefix = wsSSLPrefix;
+    //private static String sslPortSuffix = wsSSLPortSuffix;
+
     private static String sslPrefix = "ssl://";
     private static String sslPortSuffix = ":8883";
+
     private static String TWIN_API_VERSION = "api-version=2016-11-14";
 
     //Messaging clients
@@ -78,6 +87,7 @@ public class MqttIotHubConnection
             this.deviceMessaging = null;
             this.deviceMethod = null;
             this.deviceTwin = null;
+            this.webSocketEnabled = false;
         }
     }
 
@@ -110,8 +120,20 @@ public class MqttIotHubConnection
                 this.iotHubUserName = this.config.getIotHubHostname() + "/" + this.config.getDeviceId() + "/" + TWIN_API_VERSION + "/" + clientIdentifier;
 
 
-                this.deviceMessaging = new MqttMessaging(sslPrefix + this.config.getIotHubHostname() + sslPortSuffix,
-                        this.config.getDeviceId(), this.iotHubUserName, this.iotHubUserPassword, this.config.getIotHubSSLContext());
+                if (this.webSocketEnabled)
+                {
+                    String wsServerUri = wsSSLPrefix + this.config.getIotHubHostname() + "/$iothub/websocket?iothub-no-client-cert=true";
+                    this.deviceMessaging = new MqttMessaging(wsServerUri,
+                            this.config.getDeviceId(), this.iotHubUserName, this.iotHubUserPassword, this.config.getIotHubSSLContext());
+                    URI srvUri = new URI(wsServerUri);
+
+                }
+                else
+                {
+                    String serverUri = sslPrefix + this.config.getIotHubHostname() + sslPortSuffix;
+                    this.deviceMessaging = new MqttMessaging(serverUri,
+                            this.config.getDeviceId(), this.iotHubUserName, this.iotHubUserPassword, this.config.getIotHubSSLContext());
+                }
                 this.deviceMethod = new MqttDeviceMethod();
                 this.deviceTwin = new MqttDeviceTwin();
 
