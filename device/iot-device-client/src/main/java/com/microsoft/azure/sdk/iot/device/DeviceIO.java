@@ -120,12 +120,15 @@ public final class DeviceIO
                 this.transport = new HttpsTransport(this.config);
                 break;
             case AMQPS:
-                this.transport = new AmqpsTransport(this.config, false);
+                this.transport = new AmqpsTransport(this.config);
                 break;
             case AMQPS_WS:
-                this.transport = new AmqpsTransport(this.config, true);
+                this.transport = new AmqpsTransport(this.config);
                 break;
             case MQTT:
+                this.transport = new MqttTransport(this.config);
+                break;
+            case MQTT_WS:
                 this.transport = new MqttTransport(this.config);
                 break;
             default:

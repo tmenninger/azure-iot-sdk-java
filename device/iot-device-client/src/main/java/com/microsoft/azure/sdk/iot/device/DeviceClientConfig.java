@@ -35,6 +35,8 @@ public final class DeviceClientConfig
     private String pathToCertificate;
     private IotHubSSLContext iotHubSSLContext;
 
+    private boolean useWebsocket;
+
     /**
      * The callback to be invoked if a message of Device Method type received.
      */
@@ -83,6 +85,24 @@ public final class DeviceClientConfig
         this.logger = new CustomLogger(this.getClass());
         logger.LogInfo("DeviceClientConfig object is created successfully with IotHubName=%s, deviceID=%s , method name is %s ",
                 this.iotHubConnectionString.getHostName(), this.iotHubConnectionString.getDeviceId(), logger.getMethodName());
+    }
+
+    /**
+     * Getter for Websocket
+     * @return true if set, false otherwise
+     */
+    public boolean isUseWebsocket()
+    {
+        return this.useWebsocket;
+    }
+
+    /**
+     * Setter for Websocket
+     * @param useWebsocket true if to be set, false otherwise
+     */
+    public void setUseWebsocket(boolean useWebsocket)
+    {
+        this.useWebsocket = useWebsocket;
     }
 
     /**

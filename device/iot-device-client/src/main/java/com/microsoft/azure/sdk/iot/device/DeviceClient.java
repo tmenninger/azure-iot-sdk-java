@@ -146,15 +146,23 @@ public final class DeviceClient implements Closeable
         switch (protocol)
         {
             case HTTPS:
+                this.config.setUseWebsocket(false);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_HTTPS;
                 break;
             case AMQPS:
+                this.config.setUseWebsocket(false);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_AMQPS;
                 break;
             case AMQPS_WS:
+                this.config.setUseWebsocket(true);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_AMQPS;
                 break;
             case MQTT:
+                this.config.setUseWebsocket(false);
+                RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_MQTT;
+                break;
+            case MQTT_WS:
+                this.config.setUseWebsocket(true);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_MQTT;
                 break;
             default:

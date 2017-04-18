@@ -65,7 +65,7 @@ public class DeviceIOTest
         new NonStrictExpectations()
         {
             {
-                new AmqpsTransport(mockConfig, false);
+                new AmqpsTransport(mockConfig);
                 result = mockAmqpsTransport;
             }
         };
@@ -141,7 +141,7 @@ public class DeviceIOTest
         new NonStrictExpectations()
         {
             {
-                new AmqpsTransport(mockConfig,false);
+                new AmqpsTransport(mockConfig);
                 result = mockAmqpsTransport;
                 times = 1;
             }
@@ -234,7 +234,7 @@ public class DeviceIOTest
         new NonStrictExpectations()
         {
             {
-                new AmqpsTransport(mockConfig, true);
+                new AmqpsTransport(mockConfig);
                 result = mockAmqpsTransport;
                 times = 1;
             }

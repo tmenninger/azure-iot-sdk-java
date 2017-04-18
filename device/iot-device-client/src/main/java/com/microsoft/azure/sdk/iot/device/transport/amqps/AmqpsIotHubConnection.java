@@ -89,10 +89,9 @@ public final class AmqpsIotHubConnection extends BaseHandler
      * Constructor to set up connection parameters using the {@link DeviceClientConfig}.
      *
      * @param config The {@link DeviceClientConfig} corresponding to the device associated with this {@link com.microsoft.azure.sdk.iot.device.DeviceClient}.
-     * @param useWebSockets Whether the connection should use web sockets or not.
      * @throws IOException if failed connecting to iothub.
      */
-    public AmqpsIotHubConnection(DeviceClientConfig config, Boolean useWebSockets) throws IOException
+    public AmqpsIotHubConnection(DeviceClientConfig config) throws IOException
     {
         // Codes_SRS_AMQPSIOTHUBCONNECTION_15_001: [The constructor shall throw IllegalArgumentException if
         // any of the parameters of the configuration is null or empty.]
@@ -127,7 +126,7 @@ public final class AmqpsIotHubConnection extends BaseHandler
 
         this.userName = deviceId + "@sas." + iotHubName;
 
-        this.useWebSockets = useWebSockets;
+        this.useWebSockets = this.config.isUseWebsocket();
         if (useWebSockets)
         {
             this.hostName = String.format("%s:%d", this.config.getIotHubHostname(), amqpWebSocketPort);
