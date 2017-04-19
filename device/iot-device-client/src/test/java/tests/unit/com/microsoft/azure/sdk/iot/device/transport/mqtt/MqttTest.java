@@ -255,7 +255,7 @@ public class MqttTest {
                     times = 1;
                     mockMqttConnectionOptions.setPassword(password.toCharArray());
                     times = 1;
-                    mockMqttConnectionOptions.setSocketFactory(mockIotHubSSLContext.getIotHubSslContext().getSocketFactory());
+                    mockMqttConnectionOptions.setSocketFactory(mockIotHubSSLContext.getIotHubSSlContext().getSocketFactory());
                     times = 1;
                     new ConcurrentSkipListMap<>();
                     times = 1;
@@ -1359,7 +1359,7 @@ public class MqttTest {
                     mockMqttConnectionOptions.setMqttVersion(anyInt);
                     mockMqttConnectionOptions.setUserName(anyString);
                     mockMqttConnectionOptions.setPassword(password.toCharArray());
-                    mockMqttConnectionOptions.setSocketFactory(mockIotHubSSLContext.getIotHubSslContext().getSocketFactory());
+                    mockMqttConnectionOptions.setSocketFactory(mockIotHubSSLContext.getIotHubSSlContext().getSocketFactory());
                     mockMqttAsyncClient.isConnected();
                     result = false;
                     mockMqttAsyncClient.isConnected();
@@ -1419,7 +1419,7 @@ public class MqttTest {
                     mockMqttConnectionOptions.setMqttVersion(anyInt);
                     mockMqttConnectionOptions.setUserName(anyString);
                     mockMqttConnectionOptions.setPassword(password.toCharArray());
-                    mockMqttConnectionOptions.setSocketFactory(mockIotHubSSLContext.getIotHubSslContext().getSocketFactory());
+                    mockMqttConnectionOptions.setSocketFactory(mockIotHubSSLContext.getIotHubSSlContext().getSocketFactory());
 
                     mockMqttAsyncClient.isConnected();
                     result = false;

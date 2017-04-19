@@ -85,9 +85,8 @@ public class IotHubSSLContextTest
     }
 
     //Tests_SRS_IOTHUBSSLCONTEXT_25_001: [**The constructor shall create a default certificate to be used with IotHub.**]**
-    //Codes_SRS_IOTHUBSSLCONTEXT_25_002: [**The constructor shall create default SSL context for TLSv1.2.**]**
-    //Codes_SRS_IOTHUBSSLCONTEXT_25_003: [**The constructor shall create default TrustManagerFactory with the default algorithm.**]**
-
+    //Tests_SRS_IOTHUBSSLCONTEXT_25_002: [**The constructor shall create default SSL context for TLSv1.2.**]**
+    //Tests_SRS_IOTHUBSSLCONTEXT_25_003: [**The constructor shall create default TrustManagerFactory with the default algorithm.**]**
     //Tests_SRS_IOTHUBSSLCONTEXT_25_004: [**The constructor shall create default KeyStore instance with the default type and initialize it.**]**
 
     //Tests_SRS_IOTHUBSSLCONTEXT_25_005: [**The constructor shall set the above created certificate into a keystore.**]**
@@ -108,7 +107,7 @@ public class IotHubSSLContextTest
 
         //assert
         generateSSLContextVerifications();
-        assertNotNull(Deencapsulation.invoke(testContext, "getIotHubSslContext"));
+        assertNotNull(Deencapsulation.invoke(testContext, "getIotHubSSlContext"));
         testCollection.remove(mockedCertificate);
 
     }
@@ -133,7 +132,7 @@ public class IotHubSSLContextTest
                 times = 1;
             }
         };
-        assertNotNull(Deencapsulation.invoke(testContext, "getIotHubSslContext"));
+        assertNotNull(Deencapsulation.invoke(testContext, "getIotHubSSlContext"));
         testCollection.remove(mockedCertificate);
     }
 
@@ -157,7 +156,7 @@ public class IotHubSSLContextTest
                 times = 1;
             }
         };
-        assertNotNull(Deencapsulation.invoke(testContext, "getIotHubSslContext"));
+        assertNotNull(Deencapsulation.invoke(testContext, "getIotHubSSlContext"));
         testCollection.remove(mockedCertificate);
 
     }
@@ -197,7 +196,8 @@ public class IotHubSSLContextTest
         IotHubSSLContext testContext = Deencapsulation.newInstance(IotHubSSLContext.class, "Test/Cert/Path", true);
 
         //act
-        SSLContext testSSLContext = Deencapsulation.invoke(testContext, "getIotHubSslContext");
+
+        SSLContext testSSLContext = Deencapsulation.invoke(testContext, "getIotHubSSlContext");
 
         //assert
         generateSSLContextVerifications();

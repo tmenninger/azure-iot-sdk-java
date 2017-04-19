@@ -95,7 +95,7 @@ public class IotHubSSLContext
      * Getter for the IotHubSSLContext
      * @return SSLContext defined for the IotHub.
      */
-    public SSLContext getIotHubSslContext()
+    public SSLContext getIotHubSSlContext()
     {
         //Codes_SRS_IOTHUBSSLCONTEXT_25_017: [*This method shall return the value of sslContext.**]**
         return this.iotHubSslContext;

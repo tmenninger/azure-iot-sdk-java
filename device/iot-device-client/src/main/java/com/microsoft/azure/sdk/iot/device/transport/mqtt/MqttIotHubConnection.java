@@ -119,7 +119,6 @@ public class MqttIotHubConnection
                 String clientIdentifier = "DeviceClientType=" + URLEncoder.encode(TransportUtils.javaDeviceClientIdentifier + TransportUtils.clientVersion, "UTF-8");
                 this.iotHubUserName = this.config.getIotHubHostname() + "/" + this.config.getDeviceId() + "/" + TWIN_API_VERSION + "/" + clientIdentifier;
 
-
                 if (this.webSocketEnabled)
                 {
                     String wsServerUri = wsSSLPrefix + this.config.getIotHubHostname() + "/$iothub/websocket?iothub-no-client-cert=true";

@@ -15,7 +15,7 @@ public final class IotHubSSLContext
 
     protected IotHubSSLContext(String cert, boolean isPath) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException, IOException, CertificateException;
 
-    public SSLContext getIotHubSslContext();
+    public SSLContext getIotHubSSLContext();
 }
 ```
 
@@ -65,10 +65,10 @@ protected IotHubSSLContext(String cert, boolean isPath) throws NoSuchAlgorithmEx
 
 **SRS_IOTHUBSSLCONTEXT_25_016: [**The constructor shall initialize SSL context with the above initialized TrustManagerFactory and a new secure random.**]**
 
-### getIotHubSslContext
+### getIotHubSSLContext
 
 ```java
-public SSLContext getIotHubSslContext();
+public SSLContext getIotHubSSLContext();
 ```
 
 **SRS_IOTHUBSSLCONTEXT_25_017: [*This method shall return the value of sslContext.**]**

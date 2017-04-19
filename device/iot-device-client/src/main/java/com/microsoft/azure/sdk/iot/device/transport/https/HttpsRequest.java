@@ -130,7 +130,8 @@ public class HttpsRequest
             throw new IllegalArgumentException("Context cannot be null");
         }
         //Codes_SRS_HTTPSREQUEST_25_016: [The function shall set the SSL context for the IotHub.]
-        this.connection.setSSLContext(iotHubSSLContext.getIotHubSslContext());
+        this.connection.setSSLContext(iotHubSSLContext.getIotHubSSlContext());
+
         return this;
     }
 

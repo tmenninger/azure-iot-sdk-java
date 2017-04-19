@@ -648,7 +648,7 @@ public class HttpsRequestTest
         new Verifications()
         {
             {
-                Deencapsulation.invoke(mockConn, "setSSLContext", mockedContext.getIotHubSslContext());
+                Deencapsulation.invoke(mockConn, "setSSLContext", mockedContext.getIotHubSSlContext());
             }
         };
     }

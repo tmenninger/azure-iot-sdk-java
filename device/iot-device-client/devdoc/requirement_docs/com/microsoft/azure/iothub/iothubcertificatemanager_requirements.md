@@ -43,7 +43,7 @@ void setValidCertPath(String certPath) throws IOException;
 
 **SRS_IOTHUBCERTIFICATEMANAGER_25_005: [**This method shall throw FileNotFoundException if it could not be found or does not exist.**]**
 
-**SRS_IOTHUBCERTIFICATEMANAGER_25_006: [*If a user attempted to set the certificate and for somereason could not succeed then this method shall not use default certificate by setting valid certificate as null.**]**
+**SRS_IOTHUBCERTIFICATEMANAGER_25_006: [*If a user attempted to set the certificate and for some reason could not succeed then this method shall not use default certificate by setting valid certificate as null.**]**
 
 ### setValidCert
 
@@ -52,9 +52,9 @@ void setValidCert(String cert) throws IOException
 ```
 **SRS_IOTHUBCERTIFICATEMANAGER_25_007: [**This method shall throw IllegalArgumentException if parameter is null.**]**
 
-**SRS_IOTHUBCERTIFICATEMANAGER_25_008: [*This method shall save the cert provided by the user a s valid cert to be used to communicate with IotHub.**]**
+**SRS_IOTHUBCERTIFICATEMANAGER_25_008: [*This method shall save the cert provided by the user as valid cert to be used to communicate with IotHub.**]**
 
-**SRS_IOTHUBCERTIFICATEMANAGER_25_009: [*If a user attempted to set the certificate and for somereason could not succeed then this method shall not use default certificate by setting valid certificate as null.**]**
+**SRS_IOTHUBCERTIFICATEMANAGER_25_009: [*If a user attempted to set the certificate and for some reason could not succeed then this method shall not use default certificate by setting valid certificate as null.**]**
 
 ### getCertificateCollection
 

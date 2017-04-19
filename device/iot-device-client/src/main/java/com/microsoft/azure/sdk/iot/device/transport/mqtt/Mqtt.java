@@ -85,7 +85,7 @@ abstract public class Mqtt implements MqttCallback
             this.connectionOptions.setMqttVersion(mqttVersion);
             this.connectionOptions.setUserName(userName);
             this.connectionOptions.setPassword(userPassword.toCharArray());
-            this.connectionOptions.setSocketFactory(iotHubSSLContext.getIotHubSslContext().getSocketFactory());
+            this.connectionOptions.setSocketFactory(iotHubSSLContext.getIotHubSSlContext().getSocketFactory());
             this.connectionOptions.setKeepAliveInterval(90);
         }
 

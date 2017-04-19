@@ -125,7 +125,6 @@ public final class DeviceClientConfig
 
     /**
      * Setter for the providing trusted certificate.
-     *
      * @param pathToCertificate path to the certificate for one way authentication.
      */
     public void setPathToCert(String pathToCertificate)
@@ -136,7 +135,6 @@ public final class DeviceClientConfig
 
     /**
      * Getter for the path to the certificate.
-     *
      * @return the path to certificate.
      */
     public String getPathToCertificate()
@@ -149,7 +147,6 @@ public final class DeviceClientConfig
      * Setter for the user trusted certificate
      * @param userCertificateString valid user trusted certificate string
      */
-
     public void setUserCertificateString(String userCertificateString)
     {
         //Codes_SRS_DEVICECLIENTCONFIG_25_029: [**The function shall set user certificate String**] **
@@ -168,7 +165,6 @@ public final class DeviceClientConfig
 
     /**
      * Setter for the message callback. Can be {@code null}.
-     *
      * @param callback the message callback. Can be {@code null}.
      * @param context the context to be passed in to the callback.
      */
@@ -182,7 +178,6 @@ public final class DeviceClientConfig
 
     /**
      * Getter for the IoT Hub hostname.
-     *
      * @return the IoT Hub hostname.
      */
     public String getIotHubHostname()
@@ -193,7 +188,6 @@ public final class DeviceClientConfig
 
     /**
      * Getter for the IoT Hub name.
-     *
      * @return the IoT Hub name.
      */
     public String getIotHubName()

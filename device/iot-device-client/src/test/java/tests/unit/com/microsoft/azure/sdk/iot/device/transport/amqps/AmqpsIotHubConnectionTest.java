@@ -843,7 +843,7 @@ public class AmqpsIotHubConnectionTest {
                 mockTransport.sasl();
                 result = mockSasl;
                 mockSasl.plain(anyString, anyString);
-                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSslContext());
+                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSSlContext());
                 mockSslDomain.setPeerAuthentication(SslDomain.VerifyMode.VERIFY_PEER);
                 mockTransport.ssl(mockSslDomain);
             }
@@ -864,7 +864,7 @@ public class AmqpsIotHubConnectionTest {
                 times = 1;
                 mockSasl.plain(anyString, anyString);
                 times = 1;
-                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSslContext());
+                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSSlContext());
                 times = 1;
                 mockSslDomain.setPeerAuthentication(SslDomain.VerifyMode.VERIFY_PEER);
                 times = 1;
@@ -897,7 +897,7 @@ public class AmqpsIotHubConnectionTest {
                 mockTransportInternal.sasl();
                 result = mockSasl;
                 mockSasl.plain(anyString, anyString);
-                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSslContext());
+                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSSlContext());
                 mockSslDomain.setPeerAuthentication(SslDomain.VerifyMode.VERIFY_PEER);
                 mockTransportInternal.ssl(mockSslDomain);
             }
@@ -924,7 +924,7 @@ public class AmqpsIotHubConnectionTest {
                 times = 1;
                 mockSasl.plain(deviceId + "@sas." + hubName, anyString);
                 times = 1;
-                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSslContext());
+                mockSslDomain.setSslContext(mockIotHubSSLContext.getIotHubSSlContext());
                 times = 1;
                 mockSslDomain.setPeerAuthentication(SslDomain.VerifyMode.VERIFY_PEER);
                 times = 1;

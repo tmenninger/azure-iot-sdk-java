@@ -760,7 +760,7 @@ public final class AmqpsIotHubConnection extends BaseHandler
         /*
         Codes_SRS_AMQPSIOTHUBCONNECTION_25_049: [**The event handler shall set the SSL Context to IOTHub SSL context containing valid certificates.**]**
          */
-        domain.setSslContext(this.config.getIotHubSSLContext().getIotHubSslContext());
+        domain.setSslContext(this.config.getIotHubSSLContext().getIotHubSSlContext());
         domain.setPeerAuthentication(SslDomain.VerifyMode.VERIFY_PEER);
         domain.init(mode);
         return domain;
