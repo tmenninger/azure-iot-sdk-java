@@ -87,7 +87,7 @@ public class MqttIotHubConnection
             this.deviceMessaging = null;
             this.deviceMethod = null;
             this.deviceTwin = null;
-            this.webSocketEnabled = false;
+            this.webSocketEnabled = true;
         }
     }
 
@@ -121,7 +121,8 @@ public class MqttIotHubConnection
 
                 if (this.webSocketEnabled)
                 {
-                    String wsServerUri = wsSSLPrefix + this.config.getIotHubHostname() + "/$iothub/websocket?iothub-no-client-cert=true";
+                    //String wsServerUri = wsSSLPrefix + this.config.getIotHubHostname() + "/$iothub/websocket?iothub-no-client-cert=true";
+                    String wsServerUri = wsSSLPrefix + this.config.getIotHubHostname() + "/$iothub/websocket";
                     this.deviceMessaging = new MqttMessaging(wsServerUri,
                             this.config.getDeviceId(), this.iotHubUserName, this.iotHubUserPassword, this.config.getIotHubSSLContext());
                     URI srvUri = new URI(wsServerUri);
