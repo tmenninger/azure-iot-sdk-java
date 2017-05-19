@@ -438,17 +438,15 @@ public class AmqpsIotHubConnectionTest {
 
     // Tests_SRS_AMQPSIOTHUBCONNECTION_15_009: [The function shall trigger the Reactor (Proton) to begin running.]
     @Test
-    public void openTriggersProtonReactor() throws IOException, InterruptedException
+    public void openTriggersProtonReactor(@Mocked final Reactor mockedReactor) throws IOException, InterruptedException
     {
         baseExpectations();
 
         new NonStrictExpectations()
         {
             {
-                new IotHubReactor((Reactor) any);
-                result = mockIotHubReactor;
                 mockIotHubReactor.run();
-
+                times = 1;
                 mockOpenLock.waitLock(anyLong);
             }
         };

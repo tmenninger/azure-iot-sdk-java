@@ -146,23 +146,18 @@ public final class DeviceClient implements Closeable
         switch (protocol)
         {
             case HTTPS:
-                this.config.setUseWebsocket(false);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_HTTPS;
                 break;
             case AMQPS:
-                this.config.setUseWebsocket(false);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_AMQPS;
                 break;
             case AMQPS_WS:
-                this.config.setUseWebsocket(true);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_AMQPS;
                 break;
             case MQTT:
-                this.config.setUseWebsocket(false);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_MQTT;
                 break;
             case MQTT_WS:
-                this.config.setUseWebsocket(true);
                 RECEIVE_PERIOD_MILLIS = RECEIVE_PERIOD_MILLIS_MQTT;
                 break;
             default:
@@ -704,26 +699,9 @@ public final class DeviceClient implements Closeable
                 case SET_SAS_TOKEN_EXPIRY_TIME:
                 {
                     //Codes__SRS_DEVICECLIENT_25_023: ["SetSASTokenExpiryTime" is available for HTTPS/AMQP/MQTT.]
-                    if ((this.deviceIO.getProtocol() == IotHubClientProtocol.AMQPS) ||
-                            (this.deviceIO.getProtocol() == IotHubClientProtocol.AMQPS_WS) ||
-                            (this.deviceIO.getProtocol() == IotHubClientProtocol.HTTPS) ||
-                            (this.deviceIO.getProtocol() == IotHubClientProtocol.MQTT))
-                    {
-                        setOption_SetSASTokenExpiryTime(value);
-
-                    }
-                    else
-                    {
-                        logger.LogError("optionName is unknown = %s for %s, method name is %s ", optionName,
-                                this.deviceIO.getProtocol().toString(), logger.getMethodName());
-                        // Codes_SRS_DEVICECLIENT_02_015: [If optionName is null or not an option handled by the
-                        // client, then it shall throw IllegalArgumentException.]
-                        throw new IllegalArgumentException("optionName is unknown = " + optionName +
-                                " for " + this.deviceIO.getProtocol().toString());
-                    }
+                    setOption_SetSASTokenExpiryTime(value);
                     break;
                 }
-
                 default:
                     throw new IllegalArgumentException("optionName is unknown = " + optionName);
             }

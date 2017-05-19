@@ -30,16 +30,16 @@ public class MqttIotHubConnection
     private String iotHubUserPassword;
 
     //string constants
-    private static String wsSSLPrefix = "wss://";
-    private static String wsSSLPortSuffix = ":443";
+    private static final String wsSSLPrefix = "wss://";
+    private static final String wsSSLPortSuffix = ":443";
 
-    private final String WEBSOCKET_RAW_PATH = "/$iothub/websocket";
-    private final String WEBSOCKET_QUERY = "?iothub-no-client-cert=true";
+    private static final String WEBSOCKET_RAW_PATH = "/$iothub/websocket";
+    private static final String WEBSOCKET_QUERY = "?iothub-no-client-cert=true";
 
-    private static String sslPrefix = "ssl://";
-    private static String sslPortSuffix = ":8883";
+    private static final String sslPrefix = "ssl://";
+    private static final String sslPortSuffix = ":8883";
 
-    private static String TWIN_API_VERSION = "api-version=2016-11-14";
+    private static final String TWIN_API_VERSION = "api-version=2016-11-14";
 
     //Messaging clients
     private MqttMessaging deviceMessaging;

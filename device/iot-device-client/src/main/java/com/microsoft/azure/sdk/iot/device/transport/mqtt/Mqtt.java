@@ -510,7 +510,7 @@ abstract public class Mqtt implements MqttCallback
                     try
                     {
                         currentReconnectionAttempt++;
-                       // connect();
+                        connect();
 
                     }
                     catch (Exception e)

@@ -276,6 +276,58 @@ public class MqttIotHubConnectionTest
         };
     }
 
+    @Test
+    public void openEstablishesWSConnectionUsingCorrectConfig() throws IOException
+    {
+        final String WS_RAW_PATH = "/$iothub/websocket";
+        final String WS_QUERY = "?iothub-no-client-cert=true";
+        final String WS_SSLPrefix = "wss://";
+
+        baseExpectations();
+        openExpectations();
+
+        new NonStrictExpectations()
+        {
+            {
+                mockConfig.isUseWebsocket();
+                result = true;
+            }
+        };
+
+        MqttIotHubConnection connection = new MqttIotHubConnection(mockConfig);
+        connection.open();
+
+        final String actualIotHubUserName = Deencapsulation.getField(connection, "iotHubUserName");
+
+        String clientIdentifier = "DeviceClientType=" + URLEncoder.encode(TransportUtils.javaDeviceClientIdentifier + TransportUtils.clientVersion, "UTF-8");
+        assertEquals(iotHubHostName + "/" + deviceId + "/" + API_VERSION + "/" + clientIdentifier, actualIotHubUserName);
+
+        String expectedSasToken = mockToken.toString();
+        String actualUserPassword = Deencapsulation.getField(connection, "iotHubUserPassword");
+
+        assertEquals(expectedSasToken, actualUserPassword);
+
+        State expectedState = State.OPEN;
+        State actualState =  Deencapsulation.getField(connection, "state");
+        assertEquals(expectedState, actualState);
+
+        new Verifications()
+        {
+            {
+                new MqttDeviceMethod();
+                times = 1;
+                new MqttMessaging(sslPrefix + iotHubHostName + sslPortSuffix, deviceId, anyString, anyString, mockIotHubSSLContext);
+                times = 0;
+                new MqttMessaging(WS_SSLPrefix + iotHubHostName + WS_RAW_PATH + WS_QUERY, deviceId, anyString, anyString, mockIotHubSSLContext);
+                times = 1;
+                mockDeviceMessaging.start();
+                times = 1;
+                new MqttDeviceTwin();
+                times = 1;
+            }
+        };
+    }
+
     // Tests_SRS_MQTTIOTHUBCONNECTION_15_005: [If an MQTT connection is unable to be established for any reason,
     // the function shall throw an IOException.]
     @Test(expected = IOException.class)
@@ -904,7 +956,7 @@ public class MqttIotHubConnectionTest
             {
                 new IotHubSasToken(mockConfig, anyLong);
                 result = mockToken;
-                new MqttMessaging(sslPrefix + iotHubHostName + sslPortSuffix, deviceId, anyString, anyString, mockIotHubSSLContext);
+                new MqttMessaging(anyString, deviceId, anyString, anyString, mockIotHubSSLContext);
                 result = mockDeviceMessaging;
                 new MqttDeviceMethod();
                 result = mockDeviceMethods;

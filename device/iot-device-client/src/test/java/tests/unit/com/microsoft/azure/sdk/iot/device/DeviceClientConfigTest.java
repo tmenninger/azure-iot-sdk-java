@@ -367,6 +367,46 @@ public class DeviceClientConfigTest
         assertThat(testReadTimeoutMillis, is(expectedReadTimeoutMillis));
     }
 
+    @Test
+    public void setWebsocketEnabledSets() throws URISyntaxException
+    {
+        final String iotHubHostname = "test.iothubhostname";
+        final String deviceId = "test-deviceid";
+        final String deviceKey = "test-devicekey";
+        final String sharedAccessToken = null;
+        final IotHubConnectionString iotHubConnectionString =
+                Deencapsulation.newInstance(IotHubConnectionString.class,
+                                            new Class[] {String.class, String.class, String.class, String.class},
+                                            iotHubHostname,
+                                            deviceId,
+                                            deviceKey,
+                                            sharedAccessToken);
+
+        DeviceClientConfig config = new DeviceClientConfig(iotHubConnectionString);
+        config.setUseWebsocket(true);
+        assertTrue(config.isUseWebsocket());
+    }
+
+    @Test
+    public void getWebsocketEnabledGets() throws URISyntaxException
+    {
+        final String iotHubHostname = "test.iothubhostname";
+        final String deviceId = "test-deviceid";
+        final String deviceKey = "test-devicekey";
+        final String sharedAccessToken = null;
+        final IotHubConnectionString iotHubConnectionString =
+                Deencapsulation.newInstance(IotHubConnectionString.class,
+                                            new Class[] {String.class, String.class, String.class, String.class},
+                                            iotHubHostname,
+                                            deviceId,
+                                            deviceKey,
+                                            sharedAccessToken);
+
+        DeviceClientConfig config = new DeviceClientConfig(iotHubConnectionString);
+        config.setUseWebsocket(true);
+        assertTrue(config.isUseWebsocket());
+    }
+
     // Tests_SRS_DEVICECLIENTCONFIG_11_013: [The function shall return 180s.]
     @Test
     public void getMessageLockTimeoutSecsReturnsConstant()
