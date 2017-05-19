@@ -192,9 +192,9 @@ public class IotHubCertificateManager
     /**
      * Setter for the valid certificate to be used to communicate with IotHub
      * @param cert valid certificate to be used to communicate with IotHub
-     * @throws IOException If the cert string provided was null or empty
+     * @throws IllegalArgumentException If the cert string provided was null or empty
      */
-    void setValidCert(String cert) throws IOException
+    void setValidCert(String cert) throws IllegalArgumentException
     {
         //Codes_SRS_IOTHUBCERTIFICATEMANAGER_25_009: [*If a user attempted to set the certificate and for somereason could not succeed then this method shall not use default certificate by setting valid certificate as null.**]**
         this.validCert = null;

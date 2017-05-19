@@ -68,9 +68,9 @@ abstract public class Device implements PropertyCallBack<String, Object>
          */
         if (reportedProp != null)
         {
-            for (Iterator repProperty = reportedProp.iterator(); repProperty.hasNext(); )
+            for (Iterator repProperty = reportedProp.iterator(); repProperty.hasNext();)
             {
-                Property p = (Property) repProperty.next();
+                repProperty.next();
                 repProperty.remove();
             }
         }
@@ -78,10 +78,9 @@ abstract public class Device implements PropertyCallBack<String, Object>
 
         if (desiredProp != null)
         {
-            for (Iterator desiredProperty = desiredProp.entrySet().iterator(); desiredProperty.hasNext(); )
+            for (Iterator desiredProperty = desiredProp.entrySet().iterator(); desiredProperty.hasNext();)
             {
-                Map.Entry<Property, Pair<PropertyCallBack<String, Object>, Object>> propertyPairEntry = (Map.Entry<Property, Pair<PropertyCallBack<String, Object>, Object>>) desiredProperty.next();
-
+                desiredProperty.next();
                 desiredProperty.remove();
             }
         }

@@ -17,7 +17,7 @@ import java.util.Map;
 public class HttpsRequest
 {
     /** The underlying HTTPS connection stream. */
-    protected final HttpsConnection connection;
+    private final HttpsConnection connection;
 
     /**
      * Constructor. Takes a URL as an argument and returns an HTTPS request that
@@ -134,6 +134,7 @@ public class HttpsRequest
         return this;
     }
 
+    @SuppressWarnings("unused")
     protected HttpsRequest()
     {
         this.connection = null;

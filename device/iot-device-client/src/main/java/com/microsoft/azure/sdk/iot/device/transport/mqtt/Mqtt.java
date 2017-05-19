@@ -24,7 +24,7 @@ abstract public class Mqtt implements MqttCallback
      in lifetime.
      */
     private static MqttConnectionInfo info ;
-    protected static ConcurrentSkipListMap<String, byte[]> allReceivedMessages;
+    static ConcurrentSkipListMap<String, byte[]> allReceivedMessages;
     private static Object MQTT_LOCK;
 
     /*
@@ -62,13 +62,6 @@ abstract public class Mqtt implements MqttCallback
                 connectionOptions = null;
                 throw new IOException("Error initializing MQTT connection:" + e.getMessage());
             }
-            catch (Exception e)
-            {
-                mqttAsyncClient = null;
-                connectionOptions = null;
-                throw new IOException("Error initializing MQTT connection:" + e.getMessage());
-            }
-
         }
 
         /**
@@ -101,7 +94,7 @@ abstract public class Mqtt implements MqttCallback
         if (Mqtt.info == null)
         {
             Mqtt.info = new MqttConnectionInfo(serverURI, clientId, userName, password, iotHubSSLContext);
-            Mqtt.allReceivedMessages = new ConcurrentSkipListMap<String, byte[]>();
+            Mqtt.allReceivedMessages = new ConcurrentSkipListMap<>();
             Mqtt.MQTT_LOCK = new Object();
         }
 
@@ -113,7 +106,7 @@ abstract public class Mqtt implements MqttCallback
      *
      * @throws IOException if failed to set the mqtt information
      */
-    public Mqtt() throws IOException
+    public Mqtt()
     {
         /*
         ** Codes_SRS_Mqtt_25_001: [**The constructor shall instantiate MQTT lock for using base class.**]**
@@ -301,7 +294,7 @@ abstract public class Mqtt implements MqttCallback
                     throw new IOException("Cannot publish on null or empty publish topic");
                 }
 
-                while (Mqtt.info.mqttAsyncClient.getPendingDeliveryTokens().length >= Mqtt.info.maxInFlightCount)
+                while (Mqtt.info.mqttAsyncClient.getPendingDeliveryTokens().length >= MqttConnectionInfo.maxInFlightCount)
                 {
                     /*
                     **Codes_SRS_Mqtt_25_048: [**publish shall check for pending publish tokens by calling getPendingDeliveryTokens.
@@ -312,7 +305,7 @@ abstract public class Mqtt implements MqttCallback
 
                 MqttMessage mqttMessage = (payload.length == 0) ? new MqttMessage() : new MqttMessage(payload);
 
-                mqttMessage.setQos(Mqtt.info.qos);
+                mqttMessage.setQos(MqttConnectionInfo.qos);
 
                 /*
                 **Codes_SRS_Mqtt_25_014: [**The function shall publish message payload on the publishTopic specified to the IoT Hub given in the configuration.**]**
@@ -375,8 +368,8 @@ abstract public class Mqtt implements MqttCallback
                 /*
                 **Codes_SRS_Mqtt_25_017: [**The function shall subscribe to subscribeTopic specified to the IoT Hub given in the configuration.**]**
                  */
-                IMqttToken subToken = Mqtt.info.mqttAsyncClient.subscribe(topic, Mqtt.info.qos);
-                subToken.waitForCompletion(Mqtt.info.MAX_WAIT_TIME);
+                IMqttToken subToken = Mqtt.info.mqttAsyncClient.subscribe(topic, MqttConnectionInfo.qos);
+                subToken.waitForCompletion(MqttConnectionInfo.MAX_WAIT_TIME);
             }
             catch (MqttException e)
             {
@@ -396,7 +389,7 @@ abstract public class Mqtt implements MqttCallback
      * @param topic the topic to unsubscribe on mqtt broker connection.
      * @throws IOException if failed to unsubscribe the mqtt topic.
      */
-    protected void unsubscribe(String topic) throws IOException
+    void unsubscribe(String topic) throws IOException
     {
         synchronized (Mqtt.MQTT_LOCK)
         {
@@ -428,7 +421,7 @@ abstract public class Mqtt implements MqttCallback
         }
     }
 
-    protected boolean isConnected() throws IOException
+    protected boolean isConnected()
     {
         if (Mqtt.info == null || Mqtt.info.mqttAsyncClient == null)
         {

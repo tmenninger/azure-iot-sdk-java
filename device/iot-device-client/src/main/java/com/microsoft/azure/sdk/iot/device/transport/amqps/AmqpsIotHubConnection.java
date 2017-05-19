@@ -46,9 +46,8 @@ import java.util.concurrent.TimeUnit;
  */
 public final class AmqpsIotHubConnection extends BaseHandler
 {
-    private int maxWaitTimeForOpeningClosingConnection = 1*60*1000; // 1 second timeout
-    private int maxWaitTimeForTerminateExecutor = 30;
-    protected State state;
+    private final int maxWaitTimeForOpeningClosingConnection = 1*60*1000; // 1 second timeout
+    private State state;
 
     private static final String sendTag = "sender";
     private static final String receiveTag = "receiver";
@@ -77,19 +76,19 @@ public final class AmqpsIotHubConnection extends BaseHandler
     private String userName;
 
     private final Boolean useWebSockets;
-    protected DeviceClientConfig config;
+    private DeviceClientConfig config;
 
-    private List<ServerListener> listeners = new ArrayList<>();
+    private final List<ServerListener> listeners = new ArrayList<>();
     private ExecutorService executorService;
 
-    private ObjectLock openLock = new ObjectLock();
-    private ObjectLock closeLock = new ObjectLock();
+    private final ObjectLock openLock = new ObjectLock();
+    private final ObjectLock closeLock = new ObjectLock();
 
     private Reactor reactor;
 
     private Boolean reconnectCall = false;
     private int currentReconnectionAttempt = 1;
-    protected CustomLogger logger;
+    private CustomLogger logger;
 
     /**
      * Constructor to set up connection parameters using the {@link DeviceClientConfig}.
@@ -245,6 +244,7 @@ public final class AmqpsIotHubConnection extends BaseHandler
             this.executorService.shutdown();
             try {
                 // Wait a while for existing tasks to terminate
+                int maxWaitTimeForTerminateExecutor = 30;
                 if (!this.executorService.awaitTermination(maxWaitTimeForTerminateExecutor, TimeUnit.SECONDS)) {
                     this.executorService.shutdownNow(); // Cancel currently executing tasks
                     // Wait a while for tasks to respond to being cancelled
@@ -480,7 +480,7 @@ public final class AmqpsIotHubConnection extends BaseHandler
             Sasl sasl = transport.sasl();
             sasl.plain(this.userName, this.sasToken);
 
-            SslDomain domain = makeDomain(SslDomain.Mode.CLIENT);
+            SslDomain domain = makeDomain();
             transport.ssl(domain);
         }
         synchronized (openLock)
@@ -760,10 +760,9 @@ public final class AmqpsIotHubConnection extends BaseHandler
 
     /**
      * Create Proton SslDomain object from Address using the given Ssl mode
-     * @param mode Proton enum value of requested Ssl mode
      * @return the created Ssl domain
      */
-    private SslDomain makeDomain(SslDomain.Mode mode)
+    private SslDomain makeDomain()
     {
         SslDomain domain = Proton.sslDomain();
         /*
@@ -771,7 +770,7 @@ public final class AmqpsIotHubConnection extends BaseHandler
          */
         domain.setSslContext(this.config.getIotHubSSLContext().getIotHubSSlContext());
         domain.setPeerAuthentication(SslDomain.VerifyMode.VERIFY_PEER);
-        domain.init(mode);
+        domain.init(SslDomain.Mode.CLIENT);
         return domain;
     }
 
@@ -780,7 +779,7 @@ public final class AmqpsIotHubConnection extends BaseHandler
      */
     private class ReactorRunner implements Callable
     {
-        private IotHubReactor iotHubReactor;
+        private final IotHubReactor iotHubReactor;
 
         ReactorRunner(IotHubReactor iotHubReactor)
         {

@@ -20,10 +20,10 @@ import java.net.URLEncoder;
 public class MqttIotHubConnection
 {
     /** The MQTT connection lock. */
-    protected final Object MQTT_CONNECTION_LOCK = new Object();
+    private final Object MQTT_CONNECTION_LOCK = new Object();
 
-    protected final DeviceClientConfig config;
-    protected State state = State.CLOSED;
+    private final DeviceClientConfig config;
+    private State state = State.CLOSED;
 
     private String iotHubUserName;
     private String iotHubUserPassword;

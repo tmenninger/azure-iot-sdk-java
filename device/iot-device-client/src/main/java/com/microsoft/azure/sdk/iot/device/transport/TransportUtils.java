@@ -8,7 +8,7 @@ public class TransportUtils
     public static String javaDeviceClientIdentifier = "com.microsoft.azure.sdk.iot.iot-device-client/";
     public static String clientVersion = "1.2.27";
 
-    private static byte[] sleepIntervals = {1, 2, 4, 8, 16, 32, 60};
+    private static final byte[] sleepIntervals = {1, 2, 4, 8, 16, 32, 60};
     /** Generates a reconnection time with an exponential backoff
      * and a maximum value of 60 seconds.
      *
