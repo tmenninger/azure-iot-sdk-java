@@ -14,7 +14,6 @@ import com.microsoft.azure.sdk.iot.device.transport.State;
 import com.microsoft.azure.sdk.iot.device.transport.TransportUtils;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URLEncoder;
 
 
